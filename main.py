@@ -1,16 +1,33 @@
-# This is a sample Python script.
+import asyncio
+from aiogram import types
+import logging
+from bot import bot,dp
+from handlers import (
+    echo_router,
+    start_router,
+    images_router,
+    shop_router
+)
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# обработка команды
+
+async def main():
+    await bot.set_my_commands([
+        types.BotCommand(command="start", description="Старт"),
+        types.BotCommand(command="pic", description="Отправить картинку"),
+        types.BotCommand(command="my_info", description="Моя информация")
+    ])
+    dp.include_router(start_router)
+    dp.include_router(images_router)
+    dp.include_router(shop_router)
+
+    dp.include_router(echo_router)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    # запуск бота
+    await dp.start_polling(bot)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    logging.basicConfig(level=logging.INFO)
+    asyncio.run(main())
