@@ -14,14 +14,17 @@ async def Shop(callback:types.CallbackQuery):
     await callback.message.answer ('Shop', reply_markup = kb)
 @shop_router.message(F.text == 'Books')
 async def Books(message:types.Message):
-    await message.answer ('Учение свет')
+    kb = types.ReplyKeyboardRemove()
+    await message.answer ('Учение свет',reply_markup=kb)
 
 @shop_router.message(F.text == 'Manga')
 async def Manga(message: types.Message):
-    await message.answer('Japan')
+    kb = types.ReplyKeyboardRemove()
+    await message.answer('Japan', reply_markup=kb)
 @shop_router.message(F.text == 'Comiks')
 async def Comiks(message:types.Message):
-    await message.answer ('Marvel')
+    kb = types.ReplyKeyboardRemove()
+    await message.answer ('Marvel', reply_markup=kb)
 
 
 
