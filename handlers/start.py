@@ -10,7 +10,8 @@ async def start(message: types.Message):
     kb = types.InlineKeyboardMarkup(
         inline_keyboard=[
             [types.InlineKeyboardButton(text = 'Info', callback_data= 'Info'),
-             types.InlineKeyboardButton(text= 'Shop', callback_data= 'Shop')]
+             types.InlineKeyboardButton(text= 'Shop', callback_data= 'Shop'),
+             types.InlineKeyboardButton(text= 'books', callback_data= 'books')]
         ]
     )
 

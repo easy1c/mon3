@@ -7,11 +7,19 @@ from handlers import (
     start_router,
     images_router,
     shop_router,
-    fsm_router
+    fsm_router,
+    router
 )
+from db import queries
+async def on_srartup():
+    print('Бот запущен')
+    queries.init_db()
+    queries.create_tables()
+    queries.populate_db()
+
+
 
 # обработка команды
-
 async def main():
     await bot.set_my_commands([
         types.BotCommand(command="start", description="Старт"),
@@ -23,8 +31,10 @@ async def main():
     dp.include_router(images_router)
     dp.include_router(shop_router)
     dp.include_router(fsm_router)
+    dp.include_router(router)
 
     dp.include_router(echo_router)
+    dp.startup.register(on_srartup)
 
 
     # запуск бота
